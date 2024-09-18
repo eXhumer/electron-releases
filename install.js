@@ -73,6 +73,8 @@ function isInstalled () {
 function extractFile (zipPath) {
   const distPath = process.env.ELECTRON_OVERRIDE_DIST_PATH || path.join(__dirname, 'dist');
 
+  fs.rmSync(distPath, { recursive: true, force: true });
+
   return extract(zipPath, { dir: path.join(__dirname, 'dist') }).then(() => {
     // If the zip contains an "electron.d.ts" file,
     // move that up
